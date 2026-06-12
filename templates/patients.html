@@ -49,11 +49,17 @@
 
     </div>
 
+    <!-- Debug temporal -->
+    
+    <div class="alert alert-info">
+        Total patients: {{ patients|length }}
+    </div>
+
     <!-- Patient List -->
 
     <div class="row">
 
-        <!-- Patient Card -->
+        {% for patient in patients %}
 
         <div class="col-md-6 mb-4">
 
@@ -62,23 +68,23 @@
                 <div class="card-body">
 
                     <h5 class="card-title">
-                        Emma Gonzalez
+                        {{ patient.first_name }}
+                        {{ patient.last_name }}
                     </h5>
 
                     <p class="text-muted">
-                        Female • 39 weeks
+                        {{ patient.sex }}
+                    </p>
+
+                    <p>
+                        {{ patient.gestational_age }} weeks
                     </p>
 
                     <hr>
 
                     <p>
-                        <strong>Birth Date:</strong>
-                        12 May 2026
-                    </p>
-
-                    <p>
                         <strong>Birth Weight:</strong>
-                        3200 g
+                        {{ patient.birth_weight }} g
                     </p>
 
                     <p>
@@ -87,7 +93,7 @@
                     </p>
 
                     <a
-                        href="/patient/1"
+                        href="/patient/{{ patient.patient_id }}"
                         class="btn btn-outline-primary"
                     >
                         View Record
@@ -99,51 +105,7 @@
 
         </div>
 
-        <!-- Patient Card -->
-
-        <div class="col-md-6 mb-4">
-
-            <div class="card shadow-sm h-100">
-
-                <div class="card-body">
-
-                    <h5 class="card-title">
-                        Noah Silva
-                    </h5>
-
-                    <p class="text-muted">
-                        Male • 35 weeks
-                    </p>
-
-                    <hr>
-
-                    <p>
-                        <strong>Birth Date:</strong>
-                        10 May 2026
-                    </p>
-
-                    <p>
-                        <strong>Birth Weight:</strong>
-                        2450 g
-                    </p>
-
-                    <p>
-                        <strong>Status:</strong>
-                        Active
-                    </p>
-
-                    <a
-                        href="/patient/2"
-                        class="btn btn-outline-primary"
-                    >
-                        View Record
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
+        {% endfor %}
 
     </div>
 
