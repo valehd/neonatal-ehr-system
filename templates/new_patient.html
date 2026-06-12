@@ -11,39 +11,100 @@
 
     <h2>New Neonatal Record</h2>
 
-    <form class="mt-4">
+    <form method="POST" class="mt-4">
 
         <div class="row">
 
             <div class="col-md-6 mb-3">
                 <label>First Name</label>
-                <input type="text" class="form-control">
+                <input type="text" name="first_name" class="form-control">
             </div>
 
             <div class="col-md-6 mb-3">
                 <label>Last Name</label>
-                <input type="text" class="form-control">
+                <input type="text" name="last_name" class="form-control">
             </div>
 
-            <div class="col-md-4 mb-3">
-                <label>Birth Weight (g)</label>
-                <input type="number" class="form-control">
-            </div>
 
             <div class="col-md-4 mb-3">
                 <label>Gestational Age</label>
-                <input type="number" class="form-control">
+                <input type="number" name="gestational_age" class="form-control">
             </div>
 
             <div class="col-md-4 mb-3">
                 <label>Sex</label>
-                <select class="form-select">
+                <select name="sex" class="form-select">
                     <option>Male</option>
                     <option>Female</option>
                 </select>
+                 </div> 
+                 <!-- Birth Information -->
+            <div class="col-md-6 mb-3">
+                <label>Date of Birth</label>
+                <input type="date" name="date_of_birth" class="form-control">
+            </div>
+                <div class="col-md-6 mb-3">
+                    <label>Time of Birth</label>
+                    <input type="time" name="time_of_birth" class="form-control">       
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label>Delivery type</label>
+                    <select name="delivery_type" class="form-select">
+                        <option>Vaginal</option>
+                        <option>Cesarean</option>
+                    </select>
+            <!-- Anthropometric Data -->
+            
+
+                 <div class="col-md-4 mb-3">
+                <label>Birth Weight (g)</label>
+                <input type="number" name="birth_weight" class="form-control">
+            </div>  
+            <div class="col-md-4 mb-3">
+            <label>Birth Length (cm)</label>
+                <input type="number" name="birth_length" class="form-control">
+             </div>
+             <div class="col-md-4 mb-3">
+            <label>Head Circumference (cm)</label>
+                <input type="number" name="head_circumference" class="form-control">
+             </div>
+                <div class="col-md-4 mb-3"> Growth Percentile
+                    <input type="number" name="growth_percentile" class="form-control">
+                </div>
+
+<!-- neonatal adaptations -->
+<div class="col-md-6 mb-3">
+                <label>APGAR 1 min Score</label>
+                <input type="text" name="apgar_1_min" class="form-control">
+            </div>
+
+             <div class="col-md-6 mb-3">
+                <label>APGAR 5 min Score</label>
+                <input type="text" name="apgar_5_min" class="form-control">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Resuscitation Required</label>
+                <select name="resuscitation_required" class="form-select">
+                    <option value="0">No</option>
+                    <option>Yes</option>
+                </select>
+            </div>
+<!-- Administrative information-->
+            <div class="col-md-6 mb-3">
+                <label>Medical Record Number</label>
+                <input type="text" name="medical_record_number" class="form-control">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>National ID</label>
+                <input type="text" name="national_id" class="form-control">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Health Insurance</label>
+                <input type="text" name="health_insurance" class="form-control">
             </div>
 
         </div>
+
 
         <button class="btn btn-primary">
             Save Patient
