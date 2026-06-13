@@ -1,0 +1,124 @@
+<div class="card shadow-sm mb-4">
+
+    <div class="card-header d-flex justify-content-between align-items-center">
+
+        <h5 class="mb-0">
+            Neonatal Controls
+        </h5>
+
+        <span class="badge bg-primary">
+            {{ controls|length }} Controls
+        </span>
+
+    </div>
+
+    <div class="card-body">
+
+        {% if controls %}
+
+        <div class="table-responsive">
+
+            <table class="table table-hover table-sm">
+
+                <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Weight</th>
+                        <th>Temp</th>
+                        <th>HR</th>
+                        <th>RR</th>
+                        <th>BP</th>
+                        <th>Sat O₂</th>
+                        <th>Feeding</th>
+                        <th>Feeding Route</th>
+                        <th>Condition</th>
+                        <th>O₂</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for control in controls %}
+
+                    <tr>
+
+                        <td>
+                            {{ control.control_date }}
+                        </td>
+
+                        <td>
+                            {{ control.control_time }}
+                        </td>
+
+                        <td>
+                            {{ control.weight }} g
+                        </td>
+
+                        <td>
+                            {{ control.temperature }} °C
+                        </td>
+
+                        <td>
+                            {{ control.heart_rate }}
+                        </td>
+
+                        <td>
+                            {{ control.respiratory_rate }}
+                        </td>
+
+                        <td>
+                            {{ control.blood_pressure }}
+                        </td>
+
+                        <td>
+                            {{ control.oxygen_saturation }} %
+                        </td>
+
+                        <td>
+                            {{ control.feeding_type }}
+                        </td>
+
+                        <td>
+                            {{ control.feeding_route }}
+                        </td>
+
+                        <td>
+                            {{ control.general_condition }}
+                        </td>
+
+                        <td>
+
+                            {% if control.oxygen_support %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="alert alert-light">
+
+            No neonatal controls recorded yet.
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>

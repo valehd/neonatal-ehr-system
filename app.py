@@ -1,33 +1,23 @@
 from flask import Flask, render_template, request, redirect
 import os
-from dotenv import load_dotenv
-import mysql.connector
+from database.database import connection
+from repositories.patient_repository import get_all_patients
+from repositories.patient_repository import get_patient_by_id
 
+from repositories.control_repository import get_controls_by_patient_id
 
-load_dotenv()
 
 app = Flask(__name__)
 
-connection = mysql.connector.connect(
-    host=os.getenv("DB_HOST"),
-    user=os.getenv("DB_USER"),
-    password=os.getenv("DB_PASSWORD"),
-    database=os.getenv("DB_NAME")
-)
 
 
 @app.route("/")
 def patients():
-     cursor = connection.cursor(dictionary=True)
-
-     cursor.execute("SELECT * FROM patients")
-
-     patients = cursor.fetchall()
-
+     patients= get_all_patients()
      return render_template(
-        "patients.html",
-        patients=patients
-    )
+         "patients.html",
+         patients=patients
+     )
 
     
 
@@ -68,12 +58,124 @@ def new_patient():
 
 
 @app.route("/patient/<int:id>")
+
 def patient_detail(id):
+
+    patient= get_patient_by_id(id)
+    controls= get_controls_by_patient_id(id)
+
+    return render_template(
+        "patient_detail.html",
+        patient=patient,
+        controls=controls
+    )
+
+@app.route("/patient/<int:id>/new-control", methods=["GET", "POST"])
+def new_control(id):
+
     cursor = connection.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM patients WHERE patient_id = %s", (id,))
+
+    cursor.execute(
+    "SELECT * FROM patients WHERE patient_id = %s",
+    (id,)
+)
+
     patient = cursor.fetchone()
-    return render_template("patient_detail.html", patient=patient)
-    
+
+    if request.method == "POST":
+
+        control_date = request.form["control_date"]
+        control_time = request.form["control_time"]
+
+        weight = request.form["weight"]
+
+        temperature = request.form["temperature"]
+        heart_rate = request.form["heart_rate"]
+        respiratory_rate = request.form["respiratory_rate"]
+
+        blood_pressure = request.form["blood_pressure"]
+        oxygen_saturation = request.form["oxygen_saturation"]
+
+        feeding_type = request.form["feeding_type"]
+        feeding_route = request.form["feeding_route"]
+
+        general_condition = request.form["general_condition"]
+        muscle_tone = request.form["muscle_tone"]
+        skin_condition = request.form["skin_condition"]
+
+        oxygen_support = request.form["oxygen_support"]
+
+        bed_type = request.form["bed_type"]
+        incubator_temperature = request.form["incubator_temperature"]
+
+        position_changed = request.form["position_changed"]
+        morning_hygiene = request.form["morning_hygiene"]
+
+        observations = request.form["observations"]
+
+        cursor.execute(
+        """
+        INSERT INTO neonatal_controls (
+            patient_id,
+            control_date,
+            control_time,
+            weight,
+            temperature,
+            heart_rate,
+            respiratory_rate,
+            blood_pressure,
+            oxygen_saturation,
+            feeding_type,
+            feeding_route,
+            general_condition,
+            muscle_tone,
+            skin_condition,
+            oxygen_support,
+            bed_type,
+            incubator_temperature,
+            position_changed,
+            morning_hygiene,
+            observations
+        )
+        VALUES (
+            %s,%s,%s,%s,%s,
+            %s,%s,%s,%s,%s,
+            %s,%s,%s,%s,%s,
+            %s,%s,%s,%s,%s
+        )
+        """,
+        (
+            id,
+            control_date,
+            control_time,
+            weight,
+            temperature,
+            heart_rate,
+            respiratory_rate,
+            blood_pressure,
+            oxygen_saturation,
+            feeding_type,
+            feeding_route,
+            general_condition,
+            muscle_tone,
+            skin_condition,
+            oxygen_support,
+            bed_type,
+            incubator_temperature,
+            position_changed,
+            morning_hygiene,
+            observations
+        )
+    )
+
+        connection.commit()
+        return redirect(f"/patient/{id}")
+
+    return render_template(
+    "new_control.html",
+    patient=patient
+)
+
 
 
 if __name__ == "__main__":

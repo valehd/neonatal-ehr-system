@@ -1,0 +1,37 @@
+<div class="card shadow-sm mb-4">
+
+    <div class="card-header">
+        <h5 class="mb-0">
+            Admission Information
+        </h5>
+    </div>
+
+    <div class="card-body">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <strong>Gestational Age</strong>
+                <p>{{ patient.gestational_age }} weeks</p>
+            </div>
+
+            <div class="col-md-3">
+                <strong>Delivery Type</strong>
+                <p>{{ patient.delivery_type }}</p>
+            </div>
+
+            <div class="col-md-3">
+                <strong>Birth Weight</strong>
+                <p>{{ patient.birth_weight }} g</p>
+            </div>
+
+            <div class="col-md-3">
+                <strong>Growth Percentile</strong>
+                <p>{{ patient.growth_percentile }}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

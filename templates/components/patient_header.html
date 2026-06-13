@@ -1,0 +1,53 @@
+<div class="card shadow-sm mb-4">
+
+    <div class="card-body">
+
+        <div class="d-flex justify-content-between align-items-center">
+
+            <div>
+
+                <h2 class="mb-1">
+                    {{ patient.first_name }}
+                    {{ patient.last_name }}
+                </h2>
+
+                <div class="text-muted">
+
+                    MRN:
+                    {{ patient.medical_record_number }}
+
+                    •
+
+                    {{ patient.sex }}
+
+                    •
+
+                    {{ patient.gestational_age }} weeks GA
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <a
+                    href="/"
+                    class="btn btn-outline-secondary"
+                >
+                    Back
+                </a>
+
+                <a
+                    href="/patient/{{ patient.patient_id }}/new-control"
+                    class="btn btn-success"
+                >
+                    + New Control
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

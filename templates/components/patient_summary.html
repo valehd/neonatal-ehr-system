@@ -1,0 +1,88 @@
+<div class="row mb-4">
+
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    Current Weight
+                </h6>
+
+                {% if controls %}
+                    <h3>{{ controls[0].weight }} g</h3>
+                {% else %}
+                    <h3>--</h3>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    Latest Temperature
+                </h6>
+
+                {% if controls %}
+                    <h3>{{ controls[0].temperature }} °C</h3>
+                {% else %}
+                    <h3>--</h3>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    Latest Sat O₂
+                </h6>
+
+                {% if controls %}
+                    <h3>{{ controls[0].oxygen_saturation }} %</h3>
+                {% else %}
+                    <h3>--</h3>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    Days of Life
+                </h6>
+
+                <h3>--</h3>
+
+            </div>
+        </div>
+    </div>
+        <div class="col-md-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    Latest Observations
+                </h6>
+
+                {% if controls %}
+                    <h3>{{ controls.observations }}</h3>
+                {% else %}
+                    <h3>--</h3>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+</div>
