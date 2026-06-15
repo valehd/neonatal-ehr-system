@@ -21,3 +21,46 @@ def get_controls_by_patient_id(patient_id):
     cursor.close()
 
     return controls
+
+
+
+def create_control(control_data):
+
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        INSERT INTO neonatal_controls (
+            patient_id,
+            control_date,
+            control_time,
+            weight,
+            temperature,
+            heart_rate,
+            respiratory_rate,
+            blood_pressure,
+            oxygen_saturation,
+            feeding_type,
+            feeding_route,
+            general_condition,
+            muscle_tone,
+            skin_condition,
+            oxygen_support,
+            bed_type,
+            incubator_temperature,
+            position_changed,
+            morning_hygiene,
+            observations
+        )
+        VALUES (
+            %s,%s,%s,%s,%s,
+            %s,%s,%s,%s,%s,
+            %s,%s,%s,%s,%s,
+            %s,%s,%s,%s,%s
+        )
+        """,
+        control_data
+    )
+
+    connection.commit()
+    cursor.close()

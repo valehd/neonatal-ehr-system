@@ -9,12 +9,7 @@
                 <h6 class="text-muted">
                     Current Weight
                 </h6>
-
-                {% if controls %}
-                    <h3>{{ controls[0].weight }} g</h3>
-                {% else %}
-                    <h3>--</h3>
-                {% endif %}
+                <h3>{{ summary.current_weight or "--" }} g</h3>
 
             </div>
         </div>
@@ -30,11 +25,7 @@
                     Temperature
                 </h6>
 
-                {% if controls %}
-                    <h3>{{ controls[0].temperature }} °C</h3>
-                {% else %}
-                    <h3>--</h3>
-                {% endif %}
+                <h3>{{ summary.latest_temperature or "--" }} °C</h3>
 
             </div>
         </div>
@@ -49,12 +40,8 @@
                 <h6 class="text-muted">
                     Sat O₂
                 </h6>
-
-                {% if controls %}
-                    <h3>{{ controls[0].oxygen_saturation }} %</h3>
-                {% else %}
-                    <h3>--</h3>
-                {% endif %}
+                   <h3>{{ summary.latest_sat or "--" }} %</h3>
+               
 
             </div>
         </div>
@@ -70,7 +57,7 @@
                     Days of Life
                 </h6>
 
-                <h3>{{ days_of_life }}</h3>
+                <h3>{{ summary.days_of_life or "--" }}</h3>
 
             </div>
         </div>
