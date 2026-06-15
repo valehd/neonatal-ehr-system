@@ -1,5 +1,7 @@
 <div class="row mb-4">
 
+    <!-- Current Weight -->
+
     <div class="col-md-3">
         <div class="card shadow-sm text-center">
             <div class="card-body">
@@ -18,12 +20,14 @@
         </div>
     </div>
 
+    <!-- Temperature -->
+
     <div class="col-md-3">
         <div class="card shadow-sm text-center">
             <div class="card-body">
 
                 <h6 class="text-muted">
-                    Latest Temperature
+                    Temperature
                 </h6>
 
                 {% if controls %}
@@ -36,12 +40,14 @@
         </div>
     </div>
 
+    <!-- Oxygen Saturation -->
+
     <div class="col-md-3">
         <div class="card shadow-sm text-center">
             <div class="card-body">
 
                 <h6 class="text-muted">
-                    Latest Sat O₂
+                    Sat O₂
                 </h6>
 
                 {% if controls %}
@@ -54,6 +60,8 @@
         </div>
     </div>
 
+    <!-- Days of Life -->
+
     <div class="col-md-3">
         <div class="card shadow-sm text-center">
             <div class="card-body">
@@ -62,27 +70,94 @@
                     Days of Life
                 </h6>
 
-                <h3>--</h3>
+                <h3>{{ days_of_life }}</h3>
 
             </div>
         </div>
     </div>
-        <div class="col-md-3">
+
+</div>
+
+
+<div class="row mb-4">
+
+
+    <!-- Feeding -->
+
+    <div class="col-md-3">
         <div class="card shadow-sm text-center">
             <div class="card-body">
 
                 <h6 class="text-muted">
-                    Latest Observations
+                    Feeding
                 </h6>
 
                 {% if controls %}
-                    <h3>{{ controls.observations }}</h3>
+                    <h6>
+                        {{ controls[0].feeding_type }}
+                    </h6>
+                    <small>
+                        {{ controls[0].feeding_route }}
+                    </small>
                 {% else %}
                     <h3>--</h3>
                 {% endif %}
 
             </div>
         </div>
+    </div>
+
+    <!-- Oxygen Support -->
+
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center">
+            <div class="card-body">
+
+                <h6 class="text-muted">
+                    O₂ Support
+                </h6>
+
+                {% if controls %}
+
+                    {% if controls[0].oxygen_support %}
+                        <h3>Yes</h3>
+                    {% else %}
+                        <h3>No</h3>
+                    {% endif %}
+
+                {% else %}
+                    <h3>--</h3>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- Latest Clinical Notes -->
+
+<div class="card shadow-sm mb-4">
+
+    <div class="card-header">
+        <h5 class="mb-0">
+            Latest Clinical Notes
+        </h5>
+    </div>
+
+    <div class="card-body">
+
+        {% if controls %}
+            <p class="mb-0">
+                {{ controls[0].observations }}
+            </p>
+        {% else %}
+            <p class="text-muted mb-0">
+                No observations recorded.
+            </p>
+        {% endif %}
+
     </div>
 
 </div>
