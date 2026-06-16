@@ -1,3 +1,4 @@
+
 <div class="card shadow-sm mb-4">
 
     <div class="card-header">
@@ -28,6 +29,32 @@
             <div class="col-md-3">
                 <strong>Delivery Type</strong>
                 <p>{{ patient.delivery_type }}</p>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <strong>Birth Weight</strong>
+                <p>{{ patient.birth_weight_g }} g</p>
+            </div>
+
+            <div class="col-md-3">
+                <strong>Birth Length</strong>
+                <p>{{ patient.birth_length }} cm</p>
+            </div>
+
+            <div class="col-md-3">
+                <strong>Head Circumference</strong>
+                <p>{{ patient.head_circumference }} cm</p>
+            </div>
+
+            <div class="col-md-3">
+                <strong>Growth Percentile</strong>
+                <p>{{ patient.growth_percentile }}</p>
             </div>
 
         </div>

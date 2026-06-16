@@ -1,0 +1,41 @@
+<div class="card shadow-sm mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center bg-white">
+        <h5 class="mb-0">Vaccinations</h5>
+        <a href="/patient/{{ patient.patient_id }}/new-vaccine" class="btn btn-sm btn-primary">
+            Register Vaccine
+        </a>
+    </div>
+
+    <div class="card-body p-0">
+        {% if vaccines %}
+        <div class="table-responsive">
+            <table class="table table-hover table-striped mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Vaccine</th>
+                        <th>Date</th>
+                        <th>Dose</th>
+                        <th>Batch Number</th>
+                        <th>Administration Site</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vaccine in vaccines %}
+                    <tr>
+                        <td>{{ vaccine.vaccine_name }}</td>
+                        <td>{{ vaccine.administration_date }}</td>
+                        <td>{{ vaccine.dose }}</td>
+                        <td>{{ vaccine.batch_number }}</td>
+                        <td>{{ vaccine.administration_site }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="p-4 text-center text-muted">
+            <p class="mb-0">No vaccines registered.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>

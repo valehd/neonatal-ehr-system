@@ -26,7 +26,7 @@ def build_patient_summary(patient, controls):
 
         latest_control = controls[0]
 
-        summary["current_weight"] = latest_control["weight"]
+        summary["current_weight"] = latest_control["weight_g"]
         summary["latest_temperature"] = latest_control["temperature"]
         summary["latest_sat"] = latest_control["oxygen_saturation"]
         summary["latest_heart_rate"] = latest_control["heart_rate"]

@@ -1,0 +1,58 @@
+<!-- components/diagnosis_summary.html -->
+
+<div class="card shadow-sm mb-3">
+
+    <div class="card-header">
+        <h6 class="mb-0">
+            Diagnoses
+            {% if diagnoses %}
+                <span class="badge bg-secondary">
+                    {{ diagnoses|length }}
+                </span>
+            {% endif %}
+        </h6>
+    </div>
+
+    <div class="card-body">
+
+        {% if diagnoses %}
+
+            <div class="d-flex flex-wrap gap-2">
+
+                {% for diagnosis in diagnoses %}
+
+                    {% if diagnosis.status == "Active" %}
+
+                        <span class="badge bg-danger">
+                            {{ diagnosis.diagnosis_name }}
+                        </span>
+
+                    {% elif diagnosis.status == "Resolved" %}
+
+                        <span class="badge bg-success">
+                            {{ diagnosis.diagnosis_name }}
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge bg-secondary">
+                            {{ diagnosis.diagnosis_name }}
+                        </span>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <p class="text-muted mb-0">
+                No diagnoses registered.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+</div>

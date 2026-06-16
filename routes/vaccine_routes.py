@@ -1,8 +1,19 @@
 from flask import Blueprint, render_template, request, redirect
-from repositories import vaccine_repository (
-    get_vaccines_by_patient_id),
-from repositories import vaccine_repository (
-    create_vaccine)
+from repositories.vaccine_repository import (
+    get_vaccines_by_patient_id,
+    create_vaccine
+
+)
+
+from repositories.patient_repository import (
+    get_patient_by_id
+)
+
+
+vaccine_bp = Blueprint(
+    "vaccines",
+    __name__
+)
 
 @vaccine_bp.route(
     "/patient/<int:id>/new-vaccine",

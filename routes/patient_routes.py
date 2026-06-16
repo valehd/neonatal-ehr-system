@@ -1,4 +1,7 @@
 from flask import Blueprint, render_template, request, redirect
+from repositories.diagnosis_repository import (
+    get_diagnoses_by_patient_id
+)
 
 from repositories.patient_repository import (
     get_all_patients,
@@ -77,6 +80,7 @@ def patient_detail(id):
     medications = get_medications_by_patient_id(id)
 
     vaccines= get_vaccines_by_patient_id(id)
+    diagnoses = get_diagnoses_by_patient_id(id)
 
     summary = build_patient_summary(
         patient,
@@ -90,5 +94,6 @@ def patient_detail(id):
         controls=controls,
         medications=medications,
         vaccines= vaccines,
+        diagnoses=diagnoses,
         summary=summary
     )

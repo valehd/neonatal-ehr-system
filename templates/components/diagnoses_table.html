@@ -1,0 +1,108 @@
+<!-- Section: Diagnoses -->
+<div class="card shadow-sm mb-4">
+
+    <div class="card-header d-flex justify-content-between align-items-center">
+
+        <h5 class="mb-0">Diagnoses</h5>
+
+        <a href="/patient/{{ patient.patient_id }}/new-diagnosis"
+           class="btn btn-sm btn-primary">
+            Add Diagnosis
+        </a>
+
+    </div>
+
+    <div class="card-body">
+
+        {% if diagnoses %}
+
+        <div class="table-responsive">
+
+            <table class="table table-striped table-hover mb-0">
+
+                <thead>
+                    <tr>
+                        <th>Diagnosis</th>
+                        <th>ICD-10</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for diagnosis in diagnoses %}
+
+                    <tr>
+
+                        <td>
+                            <strong>
+                                {{ diagnosis.diagnosis_name }}
+                            </strong>
+                        </td>
+
+                        <td>
+                            {{ diagnosis.icd10_code }}
+                        </td>
+
+                        <td>
+                            {{ diagnosis.diagnosis_date }}
+                        </td>
+
+                        <td>
+
+                            {% if diagnosis.status == 'Active' %}
+                                <span class="badge bg-danger">
+                                    Active
+                                </span>
+
+                            {% elif diagnosis.status == 'Resolved' %}
+                                <span class="badge bg-success">
+                                    Resolved
+                                </span>
+
+                            {% else %}
+                                <span class="badge bg-secondary">
+                                    {{ diagnosis.status }}
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% if diagnosis.observations %}
+
+                    <tr>
+                        <td colspan="4">
+
+                            <small class="text-muted">
+                                <strong>Notes:</strong>
+                                {{ diagnosis.observations }}
+                            </small>
+
+                        </td>
+                    </tr>
+
+                    {% endif %}
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <p class="text-muted mb-0">
+            No diagnoses registered.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
