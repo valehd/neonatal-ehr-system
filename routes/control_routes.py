@@ -8,6 +8,10 @@ from repositories.control_repository import (
     create_control
 )
 
+from repositories.control_repository import (
+    get_controls_by_patient_id
+)
+
 control_bp = Blueprint(
     "controls",
     __name__
@@ -54,4 +58,22 @@ def new_control(id):
     return render_template(
         "new_control.html",
         patient=patient
+    )
+
+
+@control_bp.route(
+    "/patient/<int:id>/controls"
+    
+)
+
+def patient_controls(id):
+
+    patient = get_patient_by_id(id)
+
+    controls = get_controls_by_patient_id(id)
+
+    return render_template(
+        "patient_controls.html",
+        patient=patient,
+        controls=controls
     )

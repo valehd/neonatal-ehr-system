@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Control Sheet{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+        <h2 class="mb-0">Control Sheet</h2>
+        <p class="text-muted mb-0">
+            {{ patient.first_name }} {{ patient.last_name }}
+        </p>
+    </div>
+ <a
+                    href="/patient/{{ patient.patient_id }}/new-control"
+                    class="btn btn-success"
+                >
+                    + New Control
+                </a>
+    <a href="/patient/{{ patient.patient_id }}"
+       class="btn btn-outline-secondary">
+        ← Back to Patient
+    </a>
+
+</div>
+
+<div class="card shadow-sm">
+
+    <div class="card-header">
+        <h5 class="mb-0">All Controls</h5>
+    </div>
+
+    <div class="card-body p-0">
+
+        {% if controls %}
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle mb-0">
+
+                <thead class="table-light">
+                    <tr>
+                        <th>Date</th>
+                        <th>Weight</th>
+                        <th>Vitals</th>
+                        <th>Feeding</th>
+                        <th>Condition</th>
+                        <th>O₂</th>
+                        <th>Observations</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for control in controls %}
+
+                    <tr>
+
+                        <td>
+                            <div class="fw-semibold">
+                                {{ control.control_date }}
+                            </div>
+                            <small class="text-muted">
+                                {{ control.control_time }}
+                            </small>
+                        </td>
+
+                        <td class="fw-semibold text-primary">
+                            {{ control.weight_g or '--' }} g
+                        </td>
+
+                        <td class="small text-muted">
+                            T: {{ control.temperature or '--' }}°C<br>
+                            FC: {{ control.heart_rate or '--' }} bpm<br>
+                            Sat: {{ control.oxygen_saturation or '--' }}%
+                        </td>
+
+                        <td>
+                            {{ control.feeding_type or '--' }}<br>
+                            <small class="text-muted">
+                                {{ control.feeding_route or '--' }}
+                            </small>
+                        </td>
+
+                        <td class="text-capitalize">
+                            {{ control.general_condition or '--' }}
+                        </td>
+
+                        <td>
+                            {% if control.oxygen_support %}
+                                <span class="badge bg-danger">Yes</span>
+                            {% else %}
+                                <span class="badge bg-secondary">No</span>
+                            {% endif %}
+                        </td>
+
+                        <td class="small">
+                            {{ control.observations or '--' }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="p-4 text-center text-muted">
+            No controls recorded.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
