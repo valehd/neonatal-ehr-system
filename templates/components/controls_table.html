@@ -3,7 +3,7 @@
     <div class="card-header d-flex justify-content-between align-items-center bg-white py-3">
         <div>
             <h5 class="mb-0 text-dark fw-semibold">Recent Controls</h5>
-            <small class="text-muted">Showing the last 6 records</small>
+            <small class="text-muted">Showing the last 3 records</small>
         </div>
         
         <a href="/patient/{{ patient.patient_id }}/controls" class="btn btn-sm btn-outline-primary px-3">
@@ -16,19 +16,18 @@
         {% if controls %}
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0">
-                <thead class="table-light text-uppercase fs-7 text-muted">
+                <thead class="table-light  fs-7 text-muted">
                     <tr>
                         <th class="ps-4">Date & Time</th>
                         <th>Weight</th>
-                        <th>Vitals (Temp / HR / Sat)</th>
+                        <th>Vitals </th>
                         <th>Feeding</th>
                         <th>Condition</th>
                         <th>O₂ Support</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- controls[:6] recorta la lista para mostrar solo los primeros 6 registros -->
-                    {% for control in controls[:6] %}
+                    {% for control in controls[:3] %}
                     <tr>
                         <td class="ps-4">
                             <div class="fw-semibold text-dark">{{ control.control_date }}</div>
@@ -39,7 +38,6 @@
                             {{ control.weight_g or '--' }} <span class="fs-7 text-muted fw-normal">g</span>
                         </td>
 
-                        <!-- Signos vitales alineados limpiamente con texto e indicadores abreviados -->
                         <td>
                             <div class="d-flex gap-3 text-secondary small">
                                 <span>T: <strong>{{ control.temperature or '--' }}</strong>°C</span>
