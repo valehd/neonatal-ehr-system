@@ -10,7 +10,8 @@ def get_diagnoses_by_patient_id(patient_id):
         SELECT *
         FROM neonatal_diagnoses
         WHERE patient_id = %s
-        ORDER BY diagnosis_date DESC
+        ORDER BY priority ASC,
+            diagnosis_date DESC
         """,
         (patient_id,)
     )

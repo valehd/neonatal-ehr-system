@@ -106,7 +106,8 @@ INSERT INTO neonatal_controls (
     feeding_type, feeding_route, general_condition,
     muscle_tone, skin_condition, oxygen_support, bed_type,
     incubator_temperature, position_changed, morning_hygiene, observations
-) VALUES
+) 
+VALUES
 (2, '2025-11-15', '16:30:00', 'NICU',
  3250, 33.5, 110, 40, 55, 35, 90.0,
  'Parenteral', 'IV', 'Critical', 'Hypotonic', 'Mottled', TRUE, 'Open crib with cooling blanket',
@@ -165,7 +166,8 @@ INSERT INTO neonatal_controls (
     feeding_type, feeding_route, general_condition,
     muscle_tone, skin_condition, oxygen_support, bed_type,
     incubator_temperature, position_changed, morning_hygiene, observations
-) VALUES
+) 
+VALUES
 (3, '2025-12-01', '12:00:00', 'Observation',
  3680, 37.0, 148, 44, 70, 45, 98.0,
  'Enteral', 'Breast', 'Good', 'Normal', 'Normal', FALSE, 'Open crib',
@@ -222,26 +224,47 @@ INSERT INTO neonatal_controls (
 -- ============================================================
 -- DIAGNOSES
 -- ============================================================
-INSERT INTO neonatal_diagnoses (patient_id, diagnosis_name, icd10_code, diagnosis_date, status, observations) VALUES
--- P1
-(1, 'Extreme prematurity (26 weeks)', 'P07.22', '2025-10-03', 'Active', 'Gestational age confirmed by physical exam and prenatal ultrasound.'),
-(1, 'Respiratory distress syndrome (RDS)', 'P22.0', '2025-10-03', 'Resolved', 'Required intubation and surfactant. Extubated to CPAP on day 9.'),
-(1, 'Intraventricular hemorrhage grade II', 'P52.1', '2025-10-03', 'Active', 'Diagnosed on transfontanelle ultrasound at admission. Weekly ultrasound follow-up.'),
-(1, 'Neonatal sepsis — coagulase-negative Staphylococcus', 'P36.8', '2025-10-05', 'Resolved', 'Blood culture positive for CoNS. Treated with ampicillin + gentamicin for 10 days. Cultures cleared.'),
-(1, 'Anemia of prematurity', 'P61.2', '2025-10-08', 'Active', 'Required 1 RBC transfusion. Current Hct 32%. Under monitoring.'),
-(1, 'Apnea of prematurity', 'P28.4', '2025-10-16', 'Active', 'Central apneas. Caffeine ongoing. No apneas since day 25 of life.'),
+INSERT INTO neonatal_diagnoses (
+    patient_id,
+    diagnosis_name,
+    icd10_code,
+    diagnosis_date,
+    status,
+    priority,
+    observations
+)
+VALUES
 
--- P2
-(2, 'Severe birth asphyxia', 'P21.0', '2024-11-15', 'Active', 'Apgar 1 min: 3, 5 min: 6. Cord pH 6.98. Base excess -14.'),
-(2, 'Hypoxic-ischemic encephalopathy, moderate', 'P91.62', '2025-11-15', 'Active', 'Sarnat stage II. Therapeutic hypothermia 72h completed. MRI shows bilateral basal ganglia lesion.'),
-(2, 'Neonatal seizures', 'P90', '2025-11-15', 'Active', '2-minute tonic seizure. Controlled with phenobarbital. EEG improving.'),
-(2, 'Acute kidney injury, neonatal', 'P96.0', '2025-11-16', 'Resolved', 'Peak creatinine 1.8 mg/dL. Normalized within 48h with adequate hydration.'),
-(2, 'Neonatal hypoglycemia', 'P70.4', '2025-11-16', 'Resolved', 'Blood glucose 32 mg/dL, corrected with IV dextrose infusion.'),
+-- ============================================================
+-- PATIENT 1
+-- ============================================================
 
--- P3
-(3, 'Neonatal jaundice due to ABO incompatibility', 'P55.1', '2025-12-02', 'Resolved', 'Direct Coombs 3+. Mother A+, newborn O+. Peak TB 25.1 mg/dL.'),
-(3, 'Severe neonatal hyperbilirubinemia', 'P59.9', '2025-12-03', 'Resolved', 'Required double-volume exchange transfusion. Post-ET TB 12.3 mg/dL. Good outcome.'),
+(1, 'Extremely Preterm Appropriate for Gestational Age (AGA)', NULL, '2025-10-03', 'Active', 1, 'Gestational age 26 weeks. Birth weight appropriate for gestational age.'),
+(1, 'Extreme Prematurity', 'P07.22', '2025-10-03', 'Active', 2, 'Gestational age confirmed by physical examination and prenatal ultrasound.'),
+(1, 'Respiratory Distress Syndrome', 'P22.0', '2025-10-03', 'Resolved', 3, 'Required intubation and surfactant. Extubated to CPAP on day 9.'),
+(1, 'Intraventricular Hemorrhage Grade II', 'P52.1', '2025-10-03', 'Active', 4, 'Diagnosed on cranial ultrasound. Weekly imaging follow-up.'),
+(1, 'Neonatal Sepsis', 'P36.8','2025-10-05', 'Resolved', 5, 'Blood culture positive for coagulase-negative Staphylococcus.'),
+(1, 'Anemia of Prematurity','P61.2', '2025-10-08',  'Active', 6, 'Required one packed red blood cell transfusion.'),
+(1, 'Apnea of Prematurity', 'P28.4', '2025-10-16', 'Active', 7, 'Receiving caffeine therapy.'),
 
+-- ============================================================
+-- PATIENT 2
+-- ============================================================
+
+(2, 'Term Appropriate for Gestational Age (AGA)', NULL, '2025-11-15', 'Active', 1, 'Term newborn with appropriate birth weight.'),
+(2, 'Severe Birth Asphyxia', 'P21.0', '2025-11-15', 'Active', 2, 'Apgar 3 at 1 minute and 6 at 5 minutes.'),
+(2, 'Moderate Hypoxic-Ischemic Encephalopathy', 'P91.62', '2025-11-15', 'Active', 3, 'Sarnat stage II. Therapeutic hypothermia completed.'),
+(2, 'Neonatal Seizures', 'P90', '2025-11-15', 'Active', 4, 'Controlled with phenobarbital.'),
+(2, 'Acute Kidney Injury', 'P96.0', '2025-11-16', 'Resolved', 5, 'Renal function normalized after hydration.'),
+(2, 'Neonatal Hypoglycemia', 'P70.4', '2025-11-16', 'Resolved', 6, 'Corrected with intravenous dextrose.'),
+
+-- ============================================================
+-- PATIENT 3
+-- ============================================================
+
+(3, 'Term Appropriate for Gestational Age (AGA)', NULL, '2025-12-02', 'Active', 1, 'Term newborn with appropriate birth weight.'),
+(3, 'Neonatal Jaundice due to ABO Incompatibility', 'P55.1', '2025-12-02', 'Resolved', 2, 'Direct Coombs positive.'),
+(3, 'Severe Neonatal Hyperbilirubinemia', 'P59.9', '2025-12-03', 'Resolved', 3, 'Required exchange transfusion.');
 
 -- ============================================================
 -- MEDICATIONS
@@ -279,7 +302,7 @@ INSERT INTO neonatal_vaccines (patient_id, vaccine_name, administration_date, do
 -- ============================================================
 -- LABORATORY RESULTS
 -- ============================================================
-INSERT INTO neonatal_labs (patient_id, exam_date, exam_name, result, unit, reference_range, observations) VALUES
+INSERT INTO neonatal_labs (patient_id, test_date, test_name, result, unit, reference_range, observations) VALUES
 -- P1
 (1, '2024-10-03', 'Hemoglobin', '14.2', 'g/dL', '14.0-20.0', 'At birth. Normal for gestational age.'),
 (1, '2024-10-03', 'Hematocrit', '42', '%', '42-65', 'Normal at birth.'),

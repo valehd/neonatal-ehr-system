@@ -25,11 +25,25 @@
                 <strong>Sex</strong>
                 <p>{{ patient.sex }}</p>
             </div>
+            <div class="col-md-3">
+    <strong>Gestational Age</strong>
+    <p>{{ patient.gestational_age }} weeks</p>
+</div>
 
             <div class="col-md-3">
                 <strong>Delivery Type</strong>
                 <p>{{ patient.delivery_type }}</p>
             </div>
+                <hr>
+             <div class="col-md-3">
+        <strong>Apgar 1 Minute</strong>
+        <p>{{ patient.apgar_1_min }}</p>
+    </div>
+
+     <div class="col-md-3">
+        <strong>Apgar 5 Minutes</strong>
+        <p>{{ patient.apgar_5_min }}</p>
+    </div>
 
         </div>
 
@@ -42,15 +56,6 @@
                 <p>{{ patient.birth_weight_g }} g</p>
             </div>
 
-            <div class="col-md-3">
-                <strong>Birth Length</strong>
-                <p>{{ patient.birth_length }} cm</p>
-            </div>
-
-            <div class="col-md-3">
-                <strong>Head Circumference</strong>
-                <p>{{ patient.head_circumference }} cm</p>
-            </div>
 
             <div class="col-md-3">
                 <strong>Growth Percentile</strong>

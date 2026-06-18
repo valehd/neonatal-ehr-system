@@ -1,0 +1,84 @@
+<div class="card shadow-sm mb-4">
+
+    <div class="card-header d-flex justify-content-between align-items-center">
+
+        <h5 class="mb-0">
+            Laboratory Results
+
+            {% if labs %}
+                <span class="badge bg-secondary">
+                    {{ labs|length }}
+                </span>
+            {% endif %}
+        </h5>
+
+        <a href="/patient/{{ patient.patient_id }}/labs"
+           class="btn btn-outline-primary btn-sm">
+            View Results
+        </a>
+
+    </div>
+
+    <div class="card-body">
+
+        {% if labs %}
+
+        <div class="table-responsive">
+
+            <table class="table table-sm table-hover mb-0">
+
+                <thead>
+                    <tr>
+                        <th>Test</th>
+                        <th>Result</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for lab in labs[:5] %}
+
+                    <tr>
+
+                        <td>
+                            <strong>
+                                {{ lab.test_name }}
+                            </strong>
+                        </td>
+
+                        <td>
+
+                            {{ lab.result }}
+
+                            {% if lab.unit %}
+                                {{ lab.unit }}
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+                            {{ lab.test_date }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <p class="text-muted mb-0">
+            No laboratory results registered.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+</div>

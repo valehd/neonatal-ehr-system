@@ -1,150 +1,77 @@
-<div class="row mb-4">
-
-    <!-- Current Weight -->
-
-    <div class="col-md-3">
-        <div class="card shadow-sm text-center">
-            <div class="card-body">
-
-                <h6 class="text-muted">
-                    Current Weight
-                </h6>
-                <h3>{{ summary.current_weight or "--" }} g</h3>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Temperature -->
-
-    <div class="col-md-3">
-        <div class="card shadow-sm text-center">
-            <div class="card-body">
-
-                <h6 class="text-muted">
-                    Temperature
-                </h6>
-
-                <h3>{{ summary.latest_temperature or "--" }} °C</h3>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Oxygen Saturation -->
-
-    <div class="col-md-3">
-        <div class="card shadow-sm text-center">
-            <div class="card-body">
-
-                <h6 class="text-muted">
-                    Sat O₂
-                </h6>
-                   <h3>{{ summary.latest_sat or "--" }} %</h3>
-               
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Days of Life -->
-
-    <div class="col-md-3">
-        <div class="card shadow-sm text-center">
-            <div class="card-body">
-
-                <h6 class="text-muted">
-                    Days of Life
-                </h6>
-
-                <h3>{{ summary.days_of_life or "--" }}</h3>
-
-            </div>
-        </div>
-    </div>
-
-</div>
-
-
-<div class="row mb-4">
-
-
-    <!-- Feeding -->
-
-    <div class="col-md-3">
-        <div class="card shadow-sm text-center">
-            <div class="card-body">
-
-                <h6 class="text-muted">
-                    Feeding
-                </h6>
-
-                {% if controls %}
-                    <h6>
-                        {{ controls[0].feeding_type }}
-                    </h6>
-                    <small>
-                        {{ controls[0].feeding_route }}
-                    </small>
-                {% else %}
-                    <h3>--</h3>
-                {% endif %}
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Oxygen Support -->
-
-    <div class="col-md-3">
-        <div class="card shadow-sm text-center">
-            <div class="card-body">
-
-                <h6 class="text-muted">
-                    O₂ Support
-                </h6>
-
-                {% if controls %}
-
-                    {% if controls[0].oxygen_support %}
-                        <h3>Yes</h3>
-                    {% else %}
-                        <h3>No</h3>
-                    {% endif %}
-
-                {% else %}
-                    <h3>--</h3>
-                {% endif %}
-
-            </div>
-        </div>
-    </div>
-
-</div>
-
-
-<!-- Latest Clinical Notes -->
-
 <div class="card shadow-sm mb-4">
 
-    <div class="card-header">
-        <h5 class="mb-0">
-            Latest Clinical Notes
-        </h5>
-    </div>
+<div class="card-header">
+    <h5 class="mb-0">
+        Clinical Summary
+    </h5>
+</div>
 
-    <div class="card-body">
+<div class="card-body">
 
-        {% if controls %}
+    <div class="row">
+
+        <div class="col-md-3">
+            <strong>Current Weight</strong>
             <p class="mb-0">
-                {{ controls[0].observations }}
+                {{ summary.current_weight or "--" }} g
             </p>
-        {% else %}
-            <p class="text-muted mb-0">
-                No observations recorded.
+        </div>
+
+        <div class="col-md-3">
+            <strong>Days of Life</strong>
+            <p class="mb-0">
+                {{ summary.days_of_life or "--" }}
             </p>
-        {% endif %}
+        </div>
+
+        <div class="col-md-3">
+            <strong>Feeding</strong>
+
+            {% if controls %}
+                <p class="mb-0">
+                    {{ controls[0].feeding_type }}
+                </p>
+
+                <small class="text-muted">
+                    {{ controls[0].feeding_route }}
+                </small>
+            {% else %}
+                <p class="mb-0">--</p>
+            {% endif %}
+        </div>
+
+        <div class="col-md-3">
+            <strong>O₂ Support</strong>
+
+            {% if controls %}
+                <p class="mb-0">
+                    {% if controls[0].oxygen_support %}
+                        Yes
+                    {% else %}
+                        No
+                    {% endif %}
+                </p>
+            {% else %}
+                <p class="mb-0">--</p>
+            {% endif %}
+        </div>
 
     </div>
+
+    <hr>
+
+    <strong>Latest Clinical Notes</strong>
+
+    {% if controls %}
+        <p class="mt-2 mb-0">
+            {{ controls[0].observations }}
+        </p>
+    {% else %}
+        <p class="text-muted mt-2 mb-0">
+            No observations recorded.
+        </p>
+    {% endif %}
+
+</div>
 
 </div>

@@ -4,7 +4,7 @@ from routes.patient_routes import patient_bp
 from routes.control_routes import control_bp
 from routes.vaccine_routes import vaccine_bp
 from routes.diagnosis_routes import diagnosis_bp
-
+from routes.lab_routes import lab_bp
 
 
 app = Flask(__name__)
@@ -14,6 +14,6 @@ app.register_blueprint(control_bp)
 app.register_blueprint(medication_bp)
 app.register_blueprint(vaccine_bp)
 app.register_blueprint(diagnosis_bp)
-
+app.register_blueprint(lab_bp)
 if __name__ == "__main__":
     app.run(debug=True)

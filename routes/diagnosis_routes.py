@@ -5,7 +5,8 @@ from repositories.patient_repository import (
 )
 
 from repositories.diagnosis_repository import (
-    create_diagnosis
+    create_diagnosis,
+    get_diagnoses_by_patient_id
 )
 
 diagnosis_bp = Blueprint(
@@ -42,4 +43,20 @@ def new_diagnosis(id):
     return render_template(
         "new_diagnosis.html",
         patient=patient
+    )
+
+
+@diagnosis_bp.route(
+    "/patient/<int:id>/diagnoses"
+)
+def patient_diagnoses(id):
+
+    patient = get_patient_by_id(id)
+
+    diagnoses = get_diagnoses_by_patient_id(id)
+
+    return render_template(
+        "patient_diagnoses.html",
+        patient=patient,
+        diagnoses=diagnoses
     )

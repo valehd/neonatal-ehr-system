@@ -18,6 +18,7 @@ from repositories.medication_repository import (
 )
 from services.patient_service import build_patient_summary
 from repositories.vaccine_repository import get_vaccines_by_patient_id
+from repositories.lab_repository import get_labs_by_patient_id
 
 patient_bp = Blueprint("patients", __name__)
 
@@ -82,6 +83,8 @@ def patient_detail(id):
     vaccines= get_vaccines_by_patient_id(id)
     diagnoses = get_diagnoses_by_patient_id(id)
 
+    labs = get_labs_by_patient_id(id)
+
     summary = build_patient_summary(
         patient,
         controls
@@ -95,5 +98,6 @@ def patient_detail(id):
         medications=medications,
         vaccines= vaccines,
         diagnoses=diagnoses,
+        labs=labs,
         summary=summary
     )

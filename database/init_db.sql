@@ -64,7 +64,7 @@ CREATE TABLE neonatal_controls (
 -- MEDICATIONS
 -- ==========================================
 CREATE TABLE neonatal_medications (
-    id              INT AUTO_INCREMENT PRIMARY KEY,
+    medication_id              INT AUTO_INCREMENT PRIMARY KEY,
     patient_id      INT NOT NULL,
     medication_name VARCHAR(100) NOT NULL,
     dose            VARCHAR(50),
@@ -83,7 +83,7 @@ CREATE TABLE neonatal_medications (
 -- VACCINES
 -- ==========================================
 CREATE TABLE neonatal_vaccines (
-    id                  INT AUTO_INCREMENT PRIMARY KEY,
+    vaccine_id                  INT AUTO_INCREMENT PRIMARY KEY,
     patient_id          INT NOT NULL,
     vaccine_name        VARCHAR(100) NOT NULL,
     administration_date DATE NOT NULL,
@@ -101,10 +101,10 @@ CREATE TABLE neonatal_vaccines (
 -- LABS
 -- ==========================================
 CREATE TABLE neonatal_labs (
-    id              INT AUTO_INCREMENT PRIMARY KEY,
+    lab_id              INT AUTO_INCREMENT PRIMARY KEY,
     patient_id      INT NOT NULL,
-    exam_date       DATE NOT NULL,
-    exam_name       VARCHAR(100) NOT NULL,
+    test_date       DATE NOT NULL,
+    test_name       VARCHAR(100) NOT NULL,
     result          VARCHAR(100) NOT NULL,
     unit            VARCHAR(50),
     reference_range VARCHAR(100),
@@ -119,17 +119,26 @@ CREATE TABLE neonatal_labs (
 -- DIAGNOSES
 -- ==========================================
 CREATE TABLE neonatal_diagnoses (
-    id              INT AUTO_INCREMENT PRIMARY KEY,
-    patient_id      INT NOT NULL,
-    diagnosis_name  VARCHAR(255) NOT NULL,
-    icd10_code      VARCHAR(20),
-    diagnosis_date  DATE NOT NULL,
-    status          VARCHAR(50) DEFAULT 'Active',
-    observations    TEXT,
-    created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    diagnosis_id INT AUTO_INCREMENT PRIMARY KEY,
+
+    patient_id INT NOT NULL,
+
+    diagnosis_name VARCHAR(255) NOT NULL,
+
+    icd10_code VARCHAR(20),
+
+    diagnosis_date DATE NOT NULL,
+
+    status VARCHAR(50) DEFAULT 'Active',
+
+    priority INT DEFAULT 99,
+
+    observations TEXT,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
     FOREIGN KEY (patient_id)
-        REFERENCES patients(patient_id)  
+        REFERENCES patients(patient_id)
         ON DELETE CASCADE
 );
-
 

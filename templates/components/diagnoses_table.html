@@ -1,108 +1,148 @@
-<!-- Section: Diagnoses -->
+
+
 <div class="card shadow-sm mb-4">
 
-    <div class="card-header d-flex justify-content-between align-items-center">
+<div class="card-header d-flex justify-content-between align-items-center">
 
-        <h5 class="mb-0">Diagnoses</h5>
-
-        <a href="/patient/{{ patient.patient_id }}/new-diagnosis"
-           class="btn btn-sm btn-primary">
-            Add Diagnosis
-        </a>
-
-    </div>
-
-    <div class="card-body">
+    <h5 class="mb-0">
+        Diagnoses
 
         {% if diagnoses %}
+            <span class="badge bg-secondary">
+                {{ diagnoses|length }}
+            </span>
+        {% endif %}
+    </h5>
 
-        <div class="table-responsive">
+    <a href="/patient/{{ patient.patient_id }}/new-diagnosis"
+       class="btn btn-primary btn-sm">
+        Add Diagnosis
+    </a>
 
-            <table class="table table-striped table-hover mb-0">
+</div>
 
-                <thead>
-                    <tr>
-                        <th>Diagnosis</th>
-                        <th>ICD-10</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
+<div class="card-body">
 
-                <tbody>
+    {% if diagnoses %}
 
-                    {% for diagnosis in diagnoses %}
+    <div class="table-responsive">
 
-                    <tr>
+        <table class="table table-hover align-middle mb-0">
 
-                        <td>
-                            <strong>
-                                {{ diagnosis.diagnosis_name }}
-                            </strong>
-                        </td>
+            <thead>
 
-                        <td>
-                            {{ diagnosis.icd10_code }}
-                        </td>
+                <tr>
+                    <th>Diagnosis</th>
+                    <th>ICD-10</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
 
-                        <td>
-                            {{ diagnosis.diagnosis_date }}
-                        </td>
+            </thead>
 
-                        <td>
+            <tbody>
 
-                            {% if diagnosis.status == 'Active' %}
-                                <span class="badge bg-danger">
-                                    Active
-                                </span>
+                {% for diagnosis in diagnoses %}
 
-                            {% elif diagnosis.status == 'Resolved' %}
-                                <span class="badge bg-success">
-                                    Resolved
-                                </span>
+                <tr>
 
-                            {% else %}
-                                <span class="badge bg-secondary">
-                                    {{ diagnosis.status }}
-                                </span>
+                    <td>
 
-                            {% endif %}
+                        <strong>
+                            {{ diagnosis.diagnosis_name }}
+                        </strong>
 
-                        </td>
+                        {% if diagnosis.priority == 1 %}
+                            <span class="badge bg-primary ms-2">
+                                Primary
+                            </span>
+                        {% endif %}
 
-                    </tr>
-
-                    {% if diagnosis.observations %}
-
-                    <tr>
-                        <td colspan="4">
+                        {% if diagnosis.observations %}
+                            <br>
 
                             <small class="text-muted">
-                                <strong>Notes:</strong>
                                 {{ diagnosis.observations }}
                             </small>
+                        {% endif %}
 
-                        </td>
-                    </tr>
+                    </td>
 
-                    {% endif %}
+                    <td>
 
-                    {% endfor %}
+                        {% if diagnosis.icd10_code %}
+                            {{ diagnosis.icd10_code }}
+                        {% else %}
+                            <span class="text-muted">
+                                —
+                            </span>
+                        {% endif %}
 
-                </tbody>
+                    </td>
 
-            </table>
+                    <td>
 
-        </div>
+                        {% if diagnosis.status == "Active" %}
 
-        {% else %}
+                            <span class="badge bg-danger">
+                                Active
+                            </span>
 
-        <p class="text-muted mb-0">
-            No diagnoses registered.
-        </p>
+                        {% elif diagnosis.status == "Resolved" %}
 
-        {% endif %}
+                            <span class="badge bg-success">
+                                Resolved
+                            </span>
+
+                        {% elif diagnosis.status == "Suspected" %}
+
+                            <span class="badge bg-warning text-dark">
+                                Suspected
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-secondary">
+                                {{ diagnosis.status }}
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {{ diagnosis.diagnosis_date }}
+                    </td>
+
+                    <td>
+
+                        <a href="/diagnosis/{{ diagnoses.diagnosis_id }}/edit"
+                           class="btn btn-outline-secondary btn-sm">
+                            Edit
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
 
     </div>
+
+    {% else %}
+
+    <p class="text-muted mb-0">
+        No diagnoses registered.
+    </p>
+
+    {% endif %}
+
+</div>
+
 
 </div>
