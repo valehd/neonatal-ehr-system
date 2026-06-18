@@ -101,3 +101,12 @@ def patient_detail(id):
         labs=labs,
         summary=summary
     )
+
+@patient_bp.route("/patients/", methods=["GET"])
+def search_patients():
+    query = request.args.get('query', '')
+    patients = get_all_patients()
+    if query:
+        patients = [p for p in patients if query.lower() in p.first_name.lower() or query.lower() in p.last_name.lower()]
+    return render_template('patients.html', patients=patients)
+

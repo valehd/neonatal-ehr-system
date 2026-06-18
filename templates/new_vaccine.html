@@ -1,137 +1,112 @@
-{% extends "base.html" %}
-{% block title %}Register Vaccine{% endblock %}
+{% extends "base.html" %} {% block title %}Register Vaccine{% endblock %} {%
+block content %}
 
-{% block content %}
+<!-- Header Section (Idéntico a tu plantilla de Control) -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1>Register Vaccine</h1>
+    <p class="text-muted mb-0">
+      {{ patient.first_name }} {{ patient.last_name }}
+    </p>
+  </div>
 
+  <a href="/patient/{{ patient.patient_id }}" class="btn btn-outline-secondary">
+    Back to Patient
+  </a>
+</div>
 
-
-    <!-- Header Section (Idéntico a tu plantilla de Control) -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-
-        <div>
-            <h1>Register Vaccine</h1>
-            <p class="text-muted mb-0">
-                {{ patient.first_name }} {{ patient.last_name }}
-            </p>
-        </div>
-
-        <a href="/patient/{{ patient.patient_id }}"
-           class="btn btn-outline-secondary">
-            Back to Patient
-        </a>
-
+<form method="POST">
+  <!-- Vaccine Details Card -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header">
+      <h5 class="mb-0">Vaccine Details</h5>
     </div>
 
-    <form method="POST">
-
-        <!-- Vaccine Details Card -->
-        <div class="card shadow-sm mb-4">
-
-            <div class="card-header">
-                <h5 class="mb-0">Vaccine Details</h5>
-            </div>
-
-            <div class="card-body">
-
-                <div class="row">
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Vaccine</label>
-                        <select name="vaccine_name"
-                                class="form-select"
-                                required>
-                            <option value="">Select a vaccine</option>
-                            <option value="BCG">BCG</option>
-                            <option value="Hepatitis B">Hepatitis B</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Administration Date</label>
-                        <input type="date"
-                               name="administration_date"
-                               class="form-control"
-                               required>
-                    </div>
-
-                </div>
-
-            </div>
-
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Vaccine</label>
+          <select name="vaccine_name" class="form-select" required>
+            <option value="">Select a vaccine</option>
+            <option value="BCG">BCG</option>
+            <option value="Hepatitis B">Hepatitis B</option>
+            <option value="Other">Other</option>
+          </select>
         </div>
 
-        <!-- Administration Info Card -->
-        <div class="card shadow-sm mb-4">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Administration Date</label>
+          <input
+            type="date"
+            name="administration_date"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+    </div>
+  </div>
 
-            <div class="card-header">
-                <h5 class="mb-0">Administration Info</h5>
-            </div>
+  <!-- Administration Info Card -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header">
+      <h5 class="mb-0">Administration Info</h5>
+    </div>
 
-            <div class="card-body">
-
-                <div class="row">
-
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label">Dose</label>
-                        <input type="text"
-                               name="dose"
-                               class="form-control"
-                               placeholder="e.g. 0.5 mL">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label">Batch Number</label>
-                        <input type="text"
-                               name="batch_number"
-                               class="form-control">
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label">Administration Site</label>
-                        <input type="text"
-                               name="administration_site"
-                               class="form-control"
-                               placeholder="e.g. Right Deltoid">
-                    </div>
-
-                </div>
-
-            </div>
-
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Dose</label>
+          <input
+            type="text"
+            name="dose"
+            class="form-control"
+            placeholder="e.g. 0.5 mL"
+          />
         </div>
 
-        <!-- Clinical Notes Card -->
-        <div class="card shadow-sm mb-4">
-
-            <div class="card-header">
-                <h5 class="mb-0">Observations</h5>
-            </div>
-
-            <div class="card-body">
-
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-                        <label class="form-label">Notes / Comments</label>
-                        <textarea name="observations"
-                                  class="form-control"
-                                  rows="4"></textarea>
-                    </div>
-                </div>
-
-            </div>
-
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Batch Number</label>
+          <input type="text" name="batch_number" class="form-control" />
         </div>
 
-        <!-- Action Buttons -->
-        <div class="d-flex justify-content-end mb-4">
-            <button type="submit" class="btn btn-primary px-5">
-                Save Vaccine
-            </button>
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Administration Site</label>
+          <input
+            type="text"
+            name="administration_site"
+            class="form-control"
+            placeholder="e.g. Right Deltoid"
+          />
         </div>
+      </div>
+    </div>
+  </div>
 
-    </form>
+  <!-- Clinical Notes Card -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header">
+      <h5 class="mb-0">Observations</h5>
+    </div>
 
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label class="form-label">Notes / Comments</label>
+          <textarea
+            name="observations"
+            class="form-control"
+            rows="4"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- Action Buttons -->
+  <div class="d-flex justify-content-end mb-4">
+    <button type="submit" class="btn btn-primary px-5">Save Vaccine</button>
+  </div>
+</form>
 
 {% endblock %}

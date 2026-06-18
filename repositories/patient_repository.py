@@ -69,3 +69,22 @@ def create_patient(patient_data):
 
     connection.commit()
     cursor.close()
+
+
+def search_patients(search_query):
+    cursor = connection.cursor(dictionary=True)
+
+    query_param = f"%{search_query}%"
+
+    cursor.execute(
+        """
+        SELECT * FROM patients 
+        WHERE first_name LIKE %s OR last_name LIKE %s
+        """,
+        (query_param, query_param)
+    )
+
+    patients = cursor.fetchall()
+    cursor.close()
+
+    return patients
